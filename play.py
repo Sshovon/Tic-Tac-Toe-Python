@@ -9,6 +9,7 @@ run= None
 
 
 def play():
+    initialize()
     choose_player()
     display_()
     while not_over:
@@ -27,6 +28,18 @@ def play():
 def choose_player():
     global player
     player = input("Choose Player 'X' / 'O'\n")
+
+def initialize():
+    global board
+    global player
+    global not_over
+    global winner
+    global run
+    board = ['-','-','-','-','-','-','-','-','-']
+    player=None
+    not_over=True
+    winner=None
+    run= None
 
 def play_again():
     print("Press o for play again---")
@@ -92,8 +105,10 @@ def check_win():
 
 def check_tie():
     global not_over
+    global winner
     if '-' not in board:
         not_over=False
+        winner = None
     return
 
 
@@ -101,7 +116,7 @@ def check_win_row():
     global not_over
     row1 = board[0]==board[1]==board[2]!='-'
     row2 = board[3]==board[4]==board[5]!='-'
-    row3 = board[5]==board[6]==board[7]!='-'
+    row3 = board[6]==board[7]==board[8]!='-'
 
     if row1 or row2 or row3:
         not_over=False
@@ -117,7 +132,7 @@ def check_win_column():
     global not_over
     col1 = board[0]==board[3]==board[6]!='-'
     col2 = board[1]==board[4]==board[7]!='-'
-    col3 = board[3]==board[5]==board[8]!='-'
+    col3 = board[2]==board[5]==board[8]!='-'
 
     if col1 or col2 or col3:
         not_over=False
